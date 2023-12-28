@@ -17,8 +17,12 @@ const Sidebar = () => {
 
   const toggleSidebar = () => {
     
-    closeAllSubMenu();
+    
     setIsSidebarOpen(!isSidebarOpen);
+    if(isSidebarOpen)
+    {
+        closeAllSubMenu();
+    }
   };
   const closeAllSubMenu = ()=>{
     
@@ -34,9 +38,22 @@ const Sidebar = () => {
     
     setMenuItems((prevMenuItems) =>
       prevMenuItems.map((item) =>
-        item.id === id ? { ...item, isOpen: !item.isOpen } : item
+        {
+            return item.id === id ? { ...item, isOpen: !item.isOpen } : item;
+        }
       )
+     
     );
+    //for opening only one sub-menu
+    setMenuItems((prevMenuItems) =>
+      prevMenuItems.map((item) =>
+        {
+            return item.id !== id ? { ...item, isOpen: false } : item;
+        }
+      )
+     
+    );
+    
   };
 
   return (
@@ -60,14 +77,8 @@ const Sidebar = () => {
               {item.isOpen && (
                 <ul className="sub-menu" >
                  
-                  <li onClick={()=>{
-                    toggleMenu(item.id);
-                    toggleSidebar();
-                  }}>Sub-Item 1</li>
-                  <li onClick={()=>{
-                    toggleMenu(item.id);
-                    toggleSidebar();
-                  }}>Sub-Item 2</li>
+                  <li >Sub-Item 1</li>
+                  <li >Sub-Item 2</li>
                 </ul>
               )}
             </li>

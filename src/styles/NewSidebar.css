@@ -15,6 +15,8 @@
   .closedSidebar {
     transition: all 0.5s ease-in-out;
     width: 0px;
+   pointer-events: none;
+   opacity: 0;
    
    
   
